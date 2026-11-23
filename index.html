@@ -1,0 +1,534 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<meta name="description" content="Findings on a painted hunter-gatherer rock shelter in Bubiana Conservancy, Zimbabwe.">
+<link rel="icon" href="data:,">
+<title>Rocky Glen Painted Shelter</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;800&family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;600&display=swap">
+<style>
+/* Layout: a field recording sheet. One reading column (max 68rem), motif cards in an auto-fit grid, a dig-section timeline. */
+:root {
+  --bg: #edefea;
+  --surface: #f9faf7;
+  --ink: #1b201d;
+  --muted: #59625c;
+  --line: #d3d8d1;
+  --ochre: #9b3923;
+  --ochre-soft: #f1dfd7;
+  --high: #2d6a3b;
+  --med: #85650c;
+  --low: #9a3b3b;
+  --chip-bg: #e3e7e1;
+  --layer1: #d9d4c8;
+  --layer2: #cdb9a2;
+  --layer3: #c49a7f;
+  --layer4: #a9705c;
+  --display: "Archivo", "Segoe UI", system-ui, sans-serif;
+  --body: "Inter", "Segoe UI", system-ui, sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #121614; --surface: #1a1f1c; --ink: #e4e8e3; --muted: #9ca59e; --line: #2d3430;
+    --ochre: #e17b5e; --ochre-soft: #3a2621; --high: #84c993; --med: #e2bb55; --low: #e68f8f; --chip-bg: #242a26;
+    --layer1: #3a3a35; --layer2: #4a3e33; --layer3: #5a3d31; --layer4: #6b3a2d;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #121614; --surface: #1a1f1c; --ink: #e4e8e3; --muted: #9ca59e; --line: #2d3430;
+  --ochre: #e17b5e; --ochre-soft: #3a2621; --high: #84c993; --med: #e2bb55; --low: #e68f8f; --chip-bg: #242a26;
+  --layer1: #3a3a35; --layer2: #4a3e33; --layer3: #5a3d31; --layer4: #6b3a2d;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+body { background: var(--bg); color: var(--ink); font-family: var(--body); font-size: 16px; line-height: 1.55; }
+.wrap { max-width: 68rem; margin: 0 auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); padding-block: 2rem 4rem; display: grid; gap: 3rem; }
+h1, h2, h3 { font-family: var(--display); text-wrap: balance; margin: 0; letter-spacing: -0.01em; }
+h1 { font-size: clamp(2rem, 5vw, 3.2rem); font-weight: 800; line-height: 1.05; }
+h2 { font-size: clamp(1.35rem, 3vw, 1.8rem); font-weight: 750; }
+h3 { font-size: 1.1rem; font-weight: 700; }
+p { margin: 0; max-width: 65ch; }
+a { color: var(--ochre); text-underline-offset: 2px; }
+a:focus-visible, button:focus-visible, input:focus-visible, summary:focus-visible { outline: 3px solid var(--ochre); outline-offset: 2px; }
+.eyebrow, .code { font-family: var(--mono); font-size: 0.78rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); }
+section { display: grid; gap: 1.1rem; min-width: 0; }
+.lede { font-size: 1.12rem; color: var(--ink); }
+.muted { color: var(--muted); }
+.hero { display: grid; gap: 1rem; }
+.chips { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+.chip { font-family: var(--mono); font-size: 0.78rem; background: var(--chip-bg); color: var(--ink); border-radius: 999px; padding: 0.25rem 0.7rem; white-space: nowrap; }
+.conf { font-family: var(--mono); font-size: 0.72rem; font-weight: 500; border-radius: 4px; padding: 0.05rem 0.4rem; border: 1px solid currentColor; white-space: nowrap; }
+.conf.h { color: var(--high); } .conf.m { color: var(--med); } .conf.l { color: var(--low); }
+/* compare slider */
+.cmp { position: relative; border-radius: 10px; overflow: hidden; background: var(--line); --pos: 50%; touch-action: pan-y; }
+.cmp img { display: block; width: 100%; height: auto; }
+.cmp .top { position: absolute; inset: 0; clip-path: inset(0 0 0 var(--pos)); }
+.cmp .bar { position: absolute; top: 0; bottom: 0; left: var(--pos); width: 2px; background: #fff; box-shadow: 0 0 0 1px rgba(0,0,0,.4); pointer-events: none; }
+.cmp .knob { position: absolute; top: 50%; left: var(--pos); width: 34px; height: 34px; margin: -17px 0 0 -17px; border-radius: 50%; background: #fff; box-shadow: 0 1px 4px rgba(0,0,0,.5); pointer-events: none; display: grid; place-items: center; color: #222; font: 700 14px var(--body); }
+.cmp input { position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0; cursor: ew-resize; margin: 0; }
+.cmp .tag { position: absolute; top: 8px; font-family: var(--mono); font-size: 0.7rem; background: rgba(0,0,0,.6); color: #fff; padding: 2px 6px; border-radius: 4px; pointer-events: none; }
+.cmp .tag.l { left: 8px; } .cmp .tag.r { right: 8px; }
+figure { margin: 0; display: grid; gap: 0.5rem; min-width: 0; }
+figcaption { font-size: 0.85rem; color: var(--muted); }
+/* answer box */
+.answer { background: var(--surface); border: 1px solid var(--line); border-left: 4px solid var(--ochre); border-radius: 10px; padding: 1.2rem 1.3rem; display: grid; gap: 0.9rem; }
+.answer dl { margin: 0; display: grid; grid-template-columns: 7.5rem 1fr; gap: 0.6rem 1rem; }
+.answer dt { font-family: var(--mono); font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted); padding-top: 0.2rem; }
+.answer dd { margin: 0; min-width: 0; }
+@media (max-width: 560px) { .answer dl { grid-template-columns: 1fr; gap: 0.15rem; } .answer dd { margin-bottom: 0.6rem; } }
+/* motif cards */
+.cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 30rem), 1fr)); gap: 1.2rem; align-items: start; }
+.card.wide { grid-column: 1 / -1; }
+@media (min-width: 900px) { .card.wide { grid-template-columns: 1.3fr 1fr; grid-template-rows: auto; } }
+.card { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; overflow: hidden; display: grid; grid-template-rows: auto 1fr; min-width: 0; }
+.card .pic { position: relative; background: var(--line); }
+.card .pic img { display: block; width: 100%; height: auto; }
+.seg { position: absolute; right: 8px; bottom: 8px; display: flex; background: rgba(0,0,0,.62); border-radius: 999px; padding: 3px; gap: 2px; }
+.seg button { font: 500 0.75rem var(--body); color: #fff; background: transparent; border: 0; border-radius: 999px; padding: 0.3rem 0.7rem; cursor: pointer; }
+.seg button[aria-pressed="true"] { background: #fff; color: #111; }
+.card .txt { padding: 1rem 1.1rem 1.2rem; display: grid; gap: 0.7rem; align-content: start; min-width: 0; }
+.card ol { margin: 0; padding-left: 1.3rem; display: grid; gap: 0.35rem; }
+.card li { padding-left: 0.2rem; }
+.card li::marker { font-family: var(--mono); font-weight: 600; color: var(--ochre); }
+/* dig section timeline */
+.dig { display: grid; border-radius: 12px; overflow: hidden; border: 1px solid var(--line); }
+.layer { display: grid; grid-template-columns: 9.5rem 1fr; gap: 1rem; padding: 0.9rem 1.1rem; align-items: start; }
+.layer + .layer { border-top: 1px dashed rgba(0,0,0,.25); }
+.layer .when { font-family: var(--mono); font-size: 0.8rem; font-weight: 500; }
+.layer h3 { font-size: 1rem; }
+.layer p { font-size: 0.93rem; }
+.layer.l1 { background: var(--layer1); } .layer.l2 { background: var(--layer2); } .layer.l3 { background: var(--layer3); } .layer.l4 { background: var(--layer4); }
+.layer.l4, .layer.l4 .when { color: #fff; }
+.here { display: inline-block; font-family: var(--mono); font-size: 0.7rem; background: var(--ink); color: var(--bg); border-radius: 4px; padding: 0.05rem 0.4rem; margin-left: 0.4rem; vertical-align: 2px; }
+@media (max-width: 560px) { .layer { grid-template-columns: 1fr; gap: 0.3rem; } }
+/* meaning + floor */
+.grid3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 17rem), 1fr)); gap: 1rem; }
+.note { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 1rem 1.1rem; display: grid; gap: 0.5rem; align-content: start; min-width: 0; }
+.note h3 { font-size: 1rem; }
+.note p { font-size: 0.93rem; }
+.floor { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 22rem), 1fr)); gap: 1rem; }
+.floor figure img { border-radius: 10px; width: 100%; height: auto; display: block; }
+.steps { margin: 0; padding-left: 1.3rem; display: grid; gap: 0.5rem; max-width: 70ch; }
+.tight { margin: 0; padding-left: 1.3rem; display: grid; gap: 0.4rem; max-width: 70ch; }
+.dist { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 13rem), 1fr)); gap: 0.6rem; }
+.dist div { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 0.6rem 0.8rem; display: grid; }
+.dist b { font-family: var(--mono); font-size: 1.05rem; font-variant-numeric: tabular-nums; }
+.dist span { font-size: 0.85rem; color: var(--muted); }
+details { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 0.8rem 1rem; }
+summary { cursor: pointer; font-weight: 600; }
+.mail { margin-top: 1rem; }
+.mail-body { display: grid; gap: 0.7rem; margin-top: 0.7rem; justify-items: start; }
+.mail-text { white-space: pre-wrap; overflow-wrap: anywhere; font-size: 0.93rem; width: 100%; max-width: 70ch; background: var(--bg); border: 1px solid var(--line); border-radius: 8px; padding: 0.8rem 1rem; }
+.copy { font: 600 0.85rem var(--body); color: var(--ochre); background: transparent; border: 1px solid var(--ochre); border-radius: 999px; padding: 0.35rem 0.9rem; cursor: pointer; }
+.copy:hover { background: var(--ochre-soft); }
+.src { margin: 0.6rem 0 0; padding-left: 1.2rem; display: grid; gap: 0.35rem; font-size: 0.88rem; overflow-wrap: anywhere; }
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }
+
+</style>
+
+</head>
+<body>
+<main class="wrap">
+<header class="hero">
+  <p class="eyebrow">Bubiana Conservancy, Zimbabwe · visited Tue Nov 17, 2026, about 4:25 pm</p>
+  <h1>The painted shelter at Rocky Glen</h1>
+  <p class="lede">A hunter-gatherer rock art site: giraffes, antelope (one painted upside down), people with sharply bent knees, tiny walkers and a fish in fine brushwork, mostly dark red and maroon, plus a big white two-colour giraffe and farmers' pottery on the floor.</p>
+  <div class="chips">
+    <span class="chip">known locally as Ticky's Cave</span>
+    <span class="chip">21°15'23.2"S 29°50'26.2"E</span>
+    <span class="chip">49 photos + 5 videos read</span>
+    <span class="chip">25+ figures</span>
+    <span class="chip">fact-checked with Gemini</span>
+  </div>
+</header>
+
+<figure>
+  <div class="cmp">
+    <img src="hero_photo.jpg" alt="Original photo of the painted wall, very faded" width="1200" height="901">
+    <img class="top" src="hero_enh.jpg" alt="The same photo colour-enhanced: a giraffe outlined in white, a standing antelope and an upside-down antelope" width="1200" height="901">
+    <span class="tag l">Photo</span><span class="tag r">Enhanced</span>
+    <span class="bar"></span><span class="knob" aria-hidden="true">&#8596;</span>
+    <input id="cmp-giraffes" type="range" min="0" max="100" value="45" aria-label="Slide between the original photo and the enhanced version">
+  </div>
+  <figcaption>Centre of the main panel (photo by Katherine Daman, PhotoCircle). Drag across: left is the photo, right is the same pixels after a colour stretch that separates paint from rock. Left of centre: a giraffe outlined in white with red-brown patches. Right: a standing dark red antelope, with a yellow antelope painted upside down below it.</figcaption>
+</figure>
+
+<section class="answer" aria-labelledby="ans-h">
+  <h2 id="ans-h">Short answer</h2>
+  <dl>
+    <dt>Known as</dt><dd>Ticky's Cave. Botanists logged plants there under that name in May 2019, at a GPS point 2 m from yours.</dd>
+    <dt>Who</dt><dd>Hunter-gatherers, ancestors of today's San (often called Bushmen). The fine brushwork and the subjects match their tradition across Zimbabwe. The big white giraffe is probably theirs too, though farmers' later white art can't be ruled out from photos.</dd>
+    <dt>How old</dt><dd>Can't be dated from photos. The regional evidence allows roughly 10,000 to 1,000 years ago. One figure is painted over an older line, so the wall was painted at least twice, but not how far apart.</dd>
+    <dt>What</dt><dd>At least three giraffes (one big white two-colour one), antelope including one painted upside down and a small dark one, people with sharply bent knees, a line of tiny walkers, and a fish.</dd>
+    <dt>Meaning</dt><dd>Probably religious rather than a record of hunts. Researchers link this art to healers' trance dances, healing and rain, and the bent-kneed people, the upside-down (dying) antelope, the fish and the lines along the giraffes' backs all match trance-related themes.</dd>
+    <dt>Recorded?</dt><dd>Not in any public archaeology record; the only other rock art in print within 30 km is a one-line note about a neighbouring ranch. A Tree Society of Zimbabwe outing visited in October 2024 and wrote of "an elaborate painting of people and animals" with a giraffe. The national register isn't public, so ask the ranch whether it's registered.</dd>
+    <dt>Later visitors</dt><dd>Most of the 60 or so pieces piled on the floor are hand-made pottery, so Iron Age farming people used the shelter after the painters, or alongside the last of them.</dd>
+    <dt>Damage</dt><dd>Much of the painted rock skin has flaked away, taking parts of figures with it, and someone has scratched a small grid into the panel.</dd>
+  </dl>
+</section>
+
+<section id="wall" aria-labelledby="wall-h">
+  <p class="eyebrow">Catalogue</p>
+  <h2 id="wall-h">What's on the wall</h2>
+  <p class="muted">Numbers match the circles on each enhanced image. Tap Photo to see the same patch unenhanced. <span class="conf h">High</span> clear in the photos, <span class="conf m">Medium</span> likely, <span class="conf l">Low</span> a careful guess. Every call was cross-checked with a second reader and with Gemini.</p>
+  <div class="cards">
+
+    <article class="card">
+      <div class="pic">
+        <img src="giraffe2_ann.jpg" alt="Enhanced photo of the giraffe group with numbered circles" width="1200" height="735" loading="lazy" data-v="enh">
+        <img src="giraffe2_crop.jpg" alt="Original photo of the giraffe group" width="1200" height="735" loading="lazy" data-v="photo" hidden>
+        <div class="seg" role="group" aria-label="Image version"><button type="button" aria-pressed="true" data-show="enh">Enhanced</button><button type="button" aria-pressed="false" data-show="photo">Photo</button></div>
+      </div>
+      <div class="txt">
+        <p class="code">Main panel, centre · PhotoCircle photo by Katherine Daman</p>
+        <h3>Giraffes and an upside-down antelope</h3>
+        <ol>
+          <li>Large antelope standing, facing right: level back, deep body, straight legs, painted solid dark red. The speckles are mineral crust over the paint. <span class="conf h">High</span> antelope</li>
+          <li>Yellow ochre antelope painted upside down: back along the bottom, legs pointing up, one bent sharply at the joint. Its legs cross over the red antelope above. <span class="conf h">High</span></li>
+          <li>Giraffe with a patterned body and a long neck in red-brown patches, with a dark line down the back of the neck. <span class="conf h">High</span></li>
+        </ol>
+        <p class="muted">The head and upper neck of the white-outlined giraffe from the slider at the top enter the upper-left corner of this frame. Below it, left of circles 1 and 2, is a faded small red antelope. <span class="conf m">Medium</span></p>
+      </div>
+    </article>
+
+    <article class="card">
+      <div class="pic">
+        <img src="people_ann.jpg" alt="Enhanced photo of fine-line people with numbered circles" width="1200" height="761" loading="lazy" data-v="enh">
+        <img src="people_crop.jpg" alt="Original photo of the fine-line figures" width="1200" height="761" loading="lazy" data-v="photo" hidden>
+        <div class="seg" role="group" aria-label="Image version"><button type="button" aria-pressed="true" data-show="enh">Enhanced</button><button type="button" aria-pressed="false" data-show="photo">Photo</button></div>
+      </div>
+      <div class="txt">
+        <p class="code">Upper wall, left of the white giraffe · photo 18</p>
+        <h3>People with bent knees</h3>
+        <ol>
+          <li>A pair of human legs with sharply bent knees; the body above has flaked off. <span class="conf h">High</span></li>
+          <li>Long, thin person tilted far back or falling, arms hanging straight down, a short line from the head. <span class="conf h">High</span> person</li>
+          <li>Several people with tightly flexed knees and paired lines that may be sticks. <span class="conf h">High</span> people</li>
+          <li>Person bent forward at the waist with knees flexed; a thin long-legged antelope is the other possible reading. <span class="conf m">Medium</span></li>
+          <li>Upper end of the big white giraffe's neck (card 5). <span class="conf h">High</span></li>
+          <li>Small upright person with bent legs. <span class="conf m">Medium</span></li>
+        </ol>
+        <p class="muted">Single brush strokes a few millimetres wide in dark red to maroon: the classic fine-line style.</p>
+      </div>
+    </article>
+
+    <article class="card">
+      <div class="pic">
+        <img src="antelope_ann.jpg" alt="Enhanced photo of the antelope panel with numbered circles" width="1102" height="860" loading="lazy" data-v="enh">
+        <img src="antelope_crop.jpg" alt="Original photo of the antelope panel" width="1102" height="860" loading="lazy" data-v="photo" hidden>
+        <div class="seg" role="group" aria-label="Image version"><button type="button" aria-pressed="true" data-show="enh">Enhanced</button><button type="button" aria-pressed="false" data-show="photo">Photo</button></div>
+      </div>
+      <div class="txt">
+        <p class="code">Main panel, left · photos 3 and 9</p>
+        <h3>Two dark antelope over an older line</h3>
+        <ol>
+          <li>Large antelope facing left with its head lowered: deep chest and thin front legs on the left, rounded rump and thick thighs on the right. Heavy, eland-like build. The best-preserved animal on the wall. <span class="conf h">High</span> antelope, <span class="conf l">Low</span> eland</li>
+          <li>Small antelope facing left, two short ears or horns, grey-black body with maroon legs: black paint, or red that has darkened. In the Matobo Hills black is often used for wildebeest, and black doesn't mean late: black fine-line paintings in Botswana are dated to thousands of years ago. <span class="conf h">High</span></li>
+          <li>Curved orange-red band painted before the big antelope, whose front legs cross over it. So the wall was painted at least twice, though one overlap can't show whether minutes or thousands of years passed between. In the Matobo Hills, curved red lines with animals or people standing on them are read as paths to the other world. <span class="conf h">High</span> painted first, <span class="conf l">Low</span> that it was an animal</li>
+        </ol>
+      </div>
+    </article>
+
+    <article class="card">
+      <div class="pic">
+        <img src="fish_ann.jpg" alt="Enhanced photo of the fish with a numbered circle" width="979" height="706" loading="lazy" data-v="enh">
+        <img src="fish_crop.jpg" alt="Original photo of the fish" width="979" height="706" loading="lazy" data-v="photo" hidden>
+        <div class="seg" role="group" aria-label="Image version"><button type="button" aria-pressed="true" data-show="enh">Enhanced</button><button type="button" aria-pressed="false" data-show="photo">Photo</button></div>
+      </div>
+      <div class="txt">
+        <p class="code">Just above the white giraffe's back · photo 18</p>
+        <h3>A fish</h3>
+        <ol>
+          <li>Slim maroon fish with a narrow tail stalk and a sharply forked tail at lower left, swimming up to the right. <span class="conf h">High</span></li>
+        </ol>
+        <p class="muted">The orange-red smudge beside it has no recognisable shape. Fish are "relatively common" in Zimbabwe's hunter-gatherer art, where they are read as symbols of deep trance and supernatural power.</p>
+      </div>
+    </article>
+
+    <article class="card">
+      <div class="pic">
+        <img src="white_ann.jpg" alt="Enhanced photo of the large white giraffe" width="1200" height="1099" loading="lazy" data-v="enh">
+        <img src="white_wmap.jpg" alt="Map of white pigment only, showing the outline of the giraffe" width="900" height="824" loading="lazy" data-v="white" hidden>
+        <img src="white_crop.jpg" alt="Original photo of the large white giraffe" width="1200" height="1099" loading="lazy" data-v="photo" hidden>
+        <div class="seg" role="group" aria-label="Image version"><button type="button" aria-pressed="true" data-show="enh">Enhanced</button><button type="button" aria-pressed="false" data-show="white">White only</button><button type="button" aria-pressed="false" data-show="photo">Photo</button></div>
+      </div>
+      <div class="txt">
+        <p class="code">Main panel, right · photos 1, 2, 17, 18</p>
+        <h3>The big white giraffe</h3>
+        <ol>
+          <li>Long neck rising to the upper left, with a red stripe along its top; the head end has faded. <span class="conf h">High</span></li>
+          <li>Deep white body, sloping back and long straight front legs, with a red line round the rump. The largest figure on the wall, facing the other way from the patterned giraffes. <span class="conf h">High</span></li>
+        </ol>
+        <p class="muted">Crisp brushed edges rather than finger smears, and red lines that follow the outline, as on hunter-gatherer giraffes in the Matobo Hills, so it is most likely one two-colour hunter-gatherer giraffe. Farmers did sometimes copy or outline older paintings in white, so photos can't settle it. A test on site: farmers' white art always lies on top, so any fine-line paint over the white would prove it hunter-gatherer work. White paint weathers faster than red ochre, which is why it survives as a ghost.</p>
+      </div>
+    </article>
+
+    <article class="card">
+      <div class="pic">
+        <img src="file_ann.jpg" alt="Enhanced close-up of small walking people, a row of loops and scratched lines" width="1200" height="782" loading="lazy" data-v="enh">
+        <img src="file_crop.jpg" alt="Original close-up of the same patch" width="1200" height="782" loading="lazy" data-v="photo" hidden>
+        <div class="seg" role="group" aria-label="Image version"><button type="button" aria-pressed="true" data-show="enh">Enhanced</button><button type="button" aria-pressed="false" data-show="photo">Photo</button></div>
+      </div>
+      <div class="txt">
+        <p class="code">Lower left of the white giraffe · photo 5, zoomed 2x</p>
+        <h3>Tiny people walking</h3>
+        <ol>
+          <li>Four tiny people walking left in dark fine line, one holding a curved bow or stick, the tallest with a thickened upper body (a bag or cloak?). <span class="conf h">High</span></li>
+          <li>Row of four or five narrow upside-down U loops: the simplified legs of a file of people, a small "formling" (a composite motif typical of Zimbabwe), or zebra hoofprints, the reading researchers give for small U shapes in Limpopo-Shashe shelters. A row of nine at Nottingham Estate, 92 km SSW, is the closest published match. <span class="conf m">Medium</span> on the shape, <span class="conf l">Low</span> on which</li>
+          <li>Ruler-straight pale lines forming a small grid, scratched through the rock's weathered skin after the paintings. Probably recent graffiti, though scratched grids are also an older engraving type in the Limpopo-Shashe area. <span class="conf h">High</span> scratched</li>
+          <li>Slender upright person on a small grey patch. <span class="conf m">Medium</span></li>
+          <li>Long legs of another upright person. <span class="conf m">Medium</span></li>
+        </ol>
+        <p class="muted">Files of walking people are common in this region, usually all men or all women, and most "appear simply to be walking". With a bow in hand, a hunting or travelling party is as likely as a ritual procession.</p>
+      </div>
+    </article>
+
+    <article class="card wide">
+      <div class="pic">
+        <img src="redband2_crop.jpg" alt="Unenhanced close-up where grey painted rock meets rough red rock" width="1200" height="735" loading="lazy" data-v="photo">
+        <img src="redband2_lds.jpg" alt="The same close-up colour-enhanced" width="1200" height="735" loading="lazy" data-v="enh" hidden>
+        <div class="seg" role="group" aria-label="Image version"><button type="button" aria-pressed="true" data-show="photo">Photo</button><button type="button" aria-pressed="false" data-show="enh">Enhanced</button></div>
+      </div>
+      <div class="txt">
+        <p class="code">Middle band, whole length · photo 9</p>
+        <h3>The broad red areas are rock, not paint</h3>
+        <p>The paintings sit on smooth grey patches of the rock's weathered outer skin. Where that skin has flaked away in sheets, the rough, iron-rich rock underneath shows red, and the colour stretch makes it look like paint. The grey patches stand slightly higher with stepped edges, and painted lines stop exactly where the skin broke off, so the flaking happened after the paintings and took parts of them with it. <span class="conf h">High</span></p>
+        <p class="muted">Small traces of an old red wash along the edges can't be ruled out from photos alone.</p>
+      </div>
+    </article>
+
+  </div>
+</section>
+
+<section id="age" aria-labelledby="age-h">
+  <p class="eyebrow">Dating</p>
+  <h2 id="age-h">How old is it?</h2>
+  <p>No painting on a shelter wall in Zimbabwe has a published direct date. The oldest directly dated rock paintings in southern Africa (from Botswana, Lesotho and South Africa) are about 5,500 years old, though that date has a wide error and most direct dates are about 2,000 years old or younger. So this wall can't be dated from photos. The regional evidence allows <b>roughly 10,000 to 1,000 years ago</b>, and the wall was painted at least twice, though one overlap can't show how far apart. One clue to look for: near the Limpopo, sheep in fine-line paintings mark the last 2,000 years or so, and none was seen here.</p>
+  <div class="dig" role="list" aria-label="Periods at the shelter, newest on top">
+    <div class="layer l1" role="listitem">
+      <p class="when">1991 to today</p>
+      <div><h3>Ranch and conservancy</h3><p>Cattle ranches here formed Bubiana Conservancy in 1991. Your visit: Tue Nov 17, 2026.</p></div>
+    </div>
+    <div class="layer l2" role="listitem">
+      <p class="when">about AD 400 to 1820</p>
+      <div><h3>Farming peoples (Iron Age) <span class="here">pottery here</span></h3><p>Early Iron Age villages from about AD 400 to 600, Zhizo AD 700 to 1000, Leopard's Kopje about AD 900 to 1400, Mapungubwe AD 1220 to 1300 and the Khami period AD 1450 to 1820. In the 1200s Mapungubwe's people traced gold to the Gwanda and West Nicholson belt, northwest of here. The nearest excavated site, Chumnungwa, a stone-walled town 37 km NNW near the upper Bubi River, dates to about AD 1300 to 1630.</p></div>
+    </div>
+    <div class="layer l3" role="listitem">
+      <p class="when">about 2,000 years ago</p>
+      <div><h3>Herders arrive</h3><p>Khoekhoe herders reached the central Limpopo basin around 2,000 years ago and are credited with finger-painted geometric art and handprints. None was identified on this wall. Thin Bambata pottery of AD 150 to 350 also turns up in hunter-gatherer shelters; who made it is debated.</p></div>
+    </div>
+    <div class="layer l4" role="listitem">
+      <p class="when">10,000 to about 1,000 years ago</p>
+      <div><h3>Hunter-gatherer painters <span class="here">paintings here</span></h3><p>Painted wall flakes in dated Matobo cave layers show painting by about 10,000 years ago, and ochre crayons go back about 13,000. Along the Limpopo some shelters lost their hunter-gatherer users around 1,000 years ago as farmers spread, while others stayed in use until about 700 years ago.</p></div>
+    </div>
+  </div>
+  <p class="muted">Newest on top, like an excavation wall. The paintings fall somewhere in the bottom layer, painted at least twice; the pottery comes later.</p>
+</section>
+
+<section id="meaning" aria-labelledby="mean-h">
+  <p class="eyebrow">Interpretation</p>
+  <h2 id="mean-h">What it might mean</h2>
+  <div class="grid3">
+    <div class="note">
+      <h3>Religion, not hunting diaries</h3>
+      <p>The widely accepted reading is that much of this art comes from the religious life of healers, who entered trance in dances to heal the sick and bring rain. Zimbabwe's national museums describe the country's art as closely linked to this and to ideas of supernatural potency. The most carefully painted animals, such as giraffe and kudu, are rare in the food remains dug up in Matobo shelters, so the art isn't a hunting record. How far the trance reading, built on San accounts from further south, fits Zimbabwe's older art is still debated.</p>
+    </div>
+    <div class="note">
+      <h3>Bent knees and bent backs</h3>
+      <p>People bent forward at the waist, often with arms hanging or held back, and people with sharply flexed knees are standard postures of the San healing dance, in Zimbabwe as elsewhere. Posture alone doesn't prove a dance; researchers look for several figures bending together, as some here do.</p>
+    </div>
+    <div class="note">
+      <h3>The upside-down antelope</h3>
+      <p>Animals painted upside down are usually read as dead or dying, and death is a core San metaphor for a healer going into deep trance. A real kill is the plainer reading: in the Matobo Hills one upside-down buffalo is shown being cut up by hunters.</p>
+    </div>
+    <div class="note">
+      <h3>Why giraffes</h3>
+      <p>Giraffe and kudu dominate Jahunda, a surveyed painted site south of Gwanda, about 90 km away, and Zimbabwe's only naturalistic engraving of a whole animal is a giraffe over 2 m long at Mtetengwe, 77 km south. Ju/'hoan San healers have a set of "giraffe songs", and giraffes may have been tied to rain. A red line along the back of large animals, like the stripes on these giraffes, counts among trance-related motifs in this region.</p>
+    </div>
+    <div class="note">
+      <h3>The fish</h3>
+      <p>Fish are "relatively common" in Zimbabwe's hunter-gatherer art. Researchers read them as symbols of the underwater feeling of deep trance, rain-making and supernatural power. Fish are painted in the Limpopo-Shashe area too. The species can't be told from a forked tail: Zimbabwe's two painted electric fish (mormyrids) were recognised by their snouts.</p>
+    </div>
+    <div class="note">
+      <h3>The white giraffe</h3>
+      <p>Thick finger-painted white is the mark of later farmers' art, and farmers sometimes copied or outlined older paintings. But a giraffe outlined in red with a white or yellow body is a hunter-gatherer convention in the Matobo Hills, and this one's edges look brushed, so it leans hunter-gatherer. Farmers' art always lies on top, so fine-line paint over the white would settle it. Giraffe was also the main subject of the earlier, boys' initiation phase of Northern Sotho farmers' art across the Limpopo.</p>
+    </div>
+  </div>
+</section>
+
+<section id="floor" aria-labelledby="floor-h">
+  <p class="eyebrow">Shelter floor</p>
+  <h2 id="floor-h">What's on the floor</h2>
+  <div class="floor">
+    <figure>
+      <img src="pile.jpg" alt="A pile of about sixty potsherds and stones collected on a flat rock" width="1200" height="647" loading="lazy">
+      <figcaption><b>About 60 pieces</b> piled on a flat rock by earlier visitors. Around 50 are hand-made, grit-tempered potsherds with dark cores from open bonfire firing and smooth or polished faces; the rest are stones. No decoration or rim shows, so no culture can be named. At about 1 cm thick they are thicker than most Bambata ware from hunter-gatherer shelters, so farmers' pottery is more likely. A rounded cobble beside the pile may be a grinding stone.</figcaption>
+    </figure>
+    <figure>
+      <img src="flake.jpg" alt="A dark flaked stone with quartz chips and dark lumps on a granite slab" width="1145" height="1200" loading="lazy">
+      <figcaption><b>Stone on the path.</b> A dark struck flake, and quartz and chalcedony chips that look like tool-making debris; quartz was the main tool stone of Stone Age hunter-gatherers in the Matobo Hills. Among the dark lumps: a natural dark pebble, a faceted nodule that looks like haematite (iron ore, a source of red pigment), and two pitted lumps that could be ironstone or smelting slag.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<section id="known" aria-labelledby="known-h">
+  <p class="eyebrow">Next steps</p>
+  <h2 id="known-h">Is it recorded? What can be done</h2>
+  <p>No archaeology record of this shelter is public. The only other rock art in print within 30 km is a 1997 tourism study's note of San rock art on Barberton, another Bubiana ranch, whose old airstrip is about 15 km NNE. The shelter itself turns up in two natural-history records:</p>
+  <ul class="tight">
+    <li><b>May 2019:</b> botanists logged plants at "Ticky's cave, Rocky Glen Ranch", a granite kopje at 810 m, at a GPS point 2 m from yours.</li>
+    <li><b>October 2024:</b> a Tree Society of Zimbabwe outing logged plants at "Tickey's Cave" about 75 m away, and its trip report reads: "a cave with rock paintings. It was one of the bigger types with an elaborate painting of people and animals. One vague picture seemed to depict a giraffe. Opposite the cave and hiding it was a huge perfectly shaped round rock."</li>
+  </ul>
+  <p>Your group's photos from a few minutes after the shelter were taken on top of a bare, rounded rock with an all-round view, which fits that description. The national register (about 8,450 site records, now being digitised) isn't public, so the shelter may still be on file there. The ranch shows it to visitors, and its riding trips advertise "hikes to view ancient cave paintings", so the owners know the site well.</p>
+  <ol class="steps">
+    <li><b>Ask the ranch whether it's registered.</b> Under the National Museums and Monuments Act, a shelter used before 1890 is an ancient monument, its paintings and floor finds are protected relics, and the landowner and finder must report a site in writing. Reporting only puts the site on record. Making a private site a national monument needs at least a month's written notice to the owner, who can object, and taking it over needs the President's authority and compensation.</li>
+    <li><b>Where to send photos:</b> Natural History Museum of Zimbabwe, Bulawayo, +263 29 2250 045, natmuse@netconnect.co.zw, or the national office, natmus@nmmz.co.zw. The museum has an archaeology department covering Matabeleland.</li>
+    <li><b>Ask the museum to check map sheet 2129 B4 (Taula)</b>, and 2129 B2 next to it, for an existing site card; site numbers follow the map sheets. Also ask whether C. K. Cooke's 1960 report on archaeological sites in the Bubye and Limpopo valleys covers this area. It isn't online. The email below asks both.</li>
+    <li><b>Who studies this:</b> the University of Zimbabwe (Dr Ancila Nhamo, Matobo rock art), the MATOBART team (national museums with Toulouse), the Wits Rock Art Research Institute in Johannesburg, and Rob Burrett, a Bulawayo rock art recorder who works with the museums.</li>
+    <li><b>Leave everything in place.</b> Moving, piling or removing sherds, stone tools or slag without the museums' written consent is an offence, and it loses where each piece lay. Don't wet, touch, trace or rub the paintings, and keep dust down. Flash photos are fine.</li>
+    <li><b>Keep the exact spot off social media.</b> Unprotected sites get damaged when their locations spread.</li>
+    <li><b>Better photos next time:</b> straight-on, with a ruler or scale card in frame, plus a few in low side light. Worth close-ups: the white giraffe's edges (brush or finger?) and any fine lines over its white, the spot where the antelope's legs cross the red band, and below the row of loops for faded shapes. DStretch, the method used here, is also sold as phone apps (iDStretch, aDStretch).</li>
+  </ol>
+  <details class="mail">
+    <summary>Ready-to-send email to the museum</summary>
+    <div class="mail-body">
+      <button type="button" class="copy" data-copy="mail-text">Copy email</button>
+      <div id="mail-text" class="mail-text">To: natmuse@netconnect.co.zw
+Cc: natmus@nmmz.co.zw
+Subject: Painted rock shelter on Rocky Glen Ranch, Bubiana: is it on the site register?
+
+Dear Archaeology Department,
+
+I'm writing from Rocky Glen Ranch in Bubiana Conservancy, Gwanda District. There is a painted rock shelter on the ranch, known locally as Ticky's Cave. We know of no archaeological record of it and would like to make sure it is on file.
+
+Where it is:
+- 21°15'23.2"S 29°50'26.2"E (-21.25643, 29.84067), on a granite kopje at about 810 m
+- About 2 km north of the Bubiana River gorge and 5 km west of the Bubi River
+- Map sheet 2129 B4 (Taula), about 700 m south of the edge of 2129 B2
+
+What's there: fine-line paintings, mostly dark red and maroon, of at least three giraffes (one a large white giraffe with red lines along its outline), antelope (one painted upside down), people with sharply bent knees, a file of small walking figures and a fish. Much of the painted rock skin has flaked away, and someone has scratched a small grid into the panel. A pile of about 60 pieces on the floor is mostly hand-made pottery, with quartz chips, a stone flake and possibly slag.
+
+Could you tell us:
+1. Is the shelter already on the national site register? A card may be filed under 2129 B4 or 2129 B2. If so, what is its site number and what is on file?
+2. Does C. K. Cooke's 1960 report on sites in the Bubye and Limpopo valleys (South African Archaeological Bulletin 15) include it?
+3. If it isn't recorded, please treat this email as our written report of the site, and let us know what else you need.
+
+We can send photos, including colour-enhanced versions that bring out the faded figures, and would welcome advice on protecting the site, or a visit if anyone from the department is in the area.
+
+Kind regards,
+[Name]
+Rocky Glen Ranch, Bubiana Conservancy
+[Phone]</div>
+    </div>
+  </details>
+</section>
+
+<section id="where" aria-labelledby="where-h">
+  <p class="eyebrow">Location</p>
+  <h2 id="where-h">Where it sits</h2>
+  <p>On Rocky Glen Ranch in Bubiana Conservancy, Gwanda District, Matabeleland South: botanists' GPS records label this exact spot "Ticky's cave, Rocky Glen Ranch". A vegetation survey map (fieldwork 2001, published 2007) puts it where the Rocky Glen 1, Rocky Glen 2 and Boulder Creek parcels meet; allow 1 to 2 km for that detail. The rock is granitic gneiss of the Limpopo Belt, which looks like granite.</p>
+  <div class="dist">
+    <div><b>~2 km</b><span>N of the Bubiana River gorge</span></div>
+    <div><b>5 km</b><span>W of the Bubi River</span></div>
+    <div><b>53 km</b><span>ESE of West Nicholson</span></div>
+    <div><b>94 km</b><span>ESE of Gwanda</span></div>
+    <div><b>~107 km</b><span>N of Beitbridge</span></div>
+    <div><b>~120 km</b><span>NNE of Mapungubwe Hill (South Africa)</span></div>
+    <div><b>~160 km</b><span>ESE of the central Matobo Hills</span></div>
+  </div>
+  <p class="muted">Straight-line distances, rounded. Your photos 1 to 6 carry a rough phone location about 25 km away ("Makado", a ranch and roadside stop on the Bulawayo to Beitbridge road); photos 7 onward have a GPS fix that matches 21°15'23.2"S 29°50'26.2"E.</p>
+</section>
+
+<details>
+  <summary>How this was checked</summary>
+  <p style="margin-top:.6rem">Your 15 photos and 5 videos plus 34 PhotoCircle photos by Katherine Daman were each run through a decorrelation stretch, the same method as the DStretch tool rock art researchers use. It exaggerates small colour differences, so iron-oxide colour turns pink or red and grey rock turns green. Figures were read one by one at full resolution, then read again separately by a second reader. Every figure call and every fact on this page then went through two rounds with Gemini 4 at high reasoning, which opened the sources and the photos; disagreements were argued out with close-ups. Gemini changed its mind on the potsherds and the scratched grid; this page changed on the red areas, the upside-down antelope, the bent-kneed people and which way the big antelope faces. Two Gemini Deep Research reports then added leads, each checked against its own source before use; that is how the botanical records naming Ticky's Cave turned up. Nothing said in the videos was used.</p>
+</details>
+
+<details>
+  <summary>Sources</summary>
+  <ol class="src">
+    <li><a href="https://www.zimbabweflora.co.zw/speciesdata/species-record.php?record_id=103618">Flora of Zimbabwe, plant record at "Ticky's cave, Rocky Glen Ranch"</a> (9 May 2019, GPS)</li>
+    <li><a href="https://www.zimbabweflora.co.zw/speciesdata/species-record.php?record_id=126015">Flora of Zimbabwe, plant record at "Tickey's Cave"</a> (Tree Society outing, 8 Oct 2024)</li>
+    <li><a href="https://treesociety.org.zw/tree-life/532/">Tree Society of Zimbabwe, Tree Life 532</a> ("The Bubiana Gorge and Rock Paintings", 8 Oct 2024)</li>
+    <li><a href="https://haroldgoodwin.info/resources/vol4.pdf">Goodwin et al. 1997, conservancy tourism study, vol. IV</a> (San rock art on Barberton, Bubiana)</li>
+    <li><a href="https://www.heraldonline.co.zw/zimbabwe-digitises-over-8-000-archaeological-sites/">The Herald, June 2026</a> (site records being digitised)</li>
+    <li><a href="https://d-arch.ide.go.jp/map/mokuroku/mokuroku-689.1-AM-1&amp;category-103.html">IDE map catalogue</a> (sheet 2129-B4 Taula)</li>
+    <li><a href="https://doi.org/10.2307/3886562">Cooke 1960, South African Archaeological Bulletin 15(59)</a> (Bubye and Limpopo valley sites)</li>
+    <li><a href="https://open.uct.ac.za/server/api/core/bitstreams/b7148c28-60c7-49d3-8dba-42e3c177ce26/content">Nyamushosho 2020, UCT PhD</a> (Chumnungwa)</li>
+    <li><a href="https://www.zimfieldguide.com/sites/matabeleland-south/giraffe-petroglyph-mtetengwe">Zimbabwe Field Guide, Mtetengwe giraffe petroglyph</a></li>
+    <li><a href="https://journals.uj.ac.za/pdf/safa/1999_1%20UJ%20FIELD%20Archive/08_17-27%20Eastwood%20&amp;%20Blundell%201999%20Rock%20art%20of%20the%20Limpopo-Shashi%20confluence%20area.pdf">Eastwood and Blundell 1999, Limpopo-Shashi confluence rock art</a> (sheep, scratched grids, Mtetengwe)</li>
+    <li><a href="https://www.cambridge.org/core/services/aop-cambridge-core/content/view/4FBB3AB56CE689607641EDF6895F69AA/S0959774324000179a.pdf/historical_dimensions_of_rock_art_perspectives_from_peripheries.pdf">Cruz Berrocal and Gárate 2024, Cambridge Archaeological Journal</a> (caveat on the oldest direct date)</li>
+    <li><a href="https://africanrockart.britishmuseum.org/country/zimbabwe/">British Museum, African Rock Art: Zimbabwe</a> (fish, colours, formlings, farmer art)</li>
+    <li><a href="https://africanrockart.britishmuseum.org/country/zimbabwe/matobo/">British Museum, Matobo Hills</a> (red outlines with infilled bodies, figures on red lines)</li>
+    <li><a href="https://www.rockartscandinavia.com/images/articles/a12walker.pdf">Walker 2012, Adoranten</a> (Matobo art: giraffes, buffalo kill, food remains, farmer copies and layering)</li>
+    <li><a href="https://www.zimfieldguide.com/sites/matabeleland-south/explanation-y-shaped-rock-art-motifs-found-nottingham-estate-limpopo-shashi">Zimbabwe Field Guide, Nottingham Estate motifs</a> (U shapes as zebra spoor)</li>
+    <li><a href="https://wiredspace.wits.ac.za/server/api/core/bitstreams/a419881c-08ee-4b9b-96c9-ddd840886fbb/content">Louw 2016, Wits</a> (Makgabeng layering, farmers copying giraffes)</li>
+    <li><a href="https://www.cambridge.org/core/journals/antiquity/article/earliest-directly-dated-rock-paintings-from-southern-africa-new-ams-radiocarbon-dates/B071E61BE2B9640E5B9A430E1464F980">Bonneau et al. 2017, Antiquity</a> (carbon-black fine-line paintings dated)</li>
+    <li><a href="https://africanrockart.britishmuseum.org/regional_introduction/rock-art-in-southern-africa/">British Museum, Rock art in southern Africa</a> (trance reading, Late White, giraffes and rain)</li>
+    <li><a href="https://whc.unesco.org/uploads/nominations/306rev.pdf">NMMZ, Matobo Hills World Heritage nomination</a> (no direct dates, painted spalls, potency, figure sizes)</li>
+    <li><a href="https://www.ifas.org.za/research/uncategorized/the-matobart-rock-art-project-2017-2021/">IFAS, MATOBART project</a> (10,000 to 2,000 years, oldest direct date in southern Africa about 5,500 years)</li>
+    <li><a href="https://wiredspace.wits.ac.za/bitstreams/dc5f6fed-4706-402e-ae3a-7a4faf5c1f5f/download">Pinto 2019, Wits PhD</a> (Limpopo occupation, trance postures, red dorsal line, herders and handprints)</li>
+    <li><a href="https://journals.uj.ac.za/pdf/safa/1994_2%20UJ%20FIELD%20Archive/03_94-102%20Walker%201994%20Later%20Stone%20Age%20fnerary%20practice%20in%20the%20Matopos,%20Zimbabwe.pdf">Walker 1994, Southern African Field Archaeology</a> (black paint and wildebeest)</li>
+    <li><a href="https://journals.uj.ac.za/pdf/safa/2002-3%20UJ%20FIELD%20Archive/11-12_4-63%20Huffman%20&amp;%20Kinahan%202002-3%20Mitigation%20of%20the%20Letsibogo%20Dam,%20Botswana.pdf">Huffman and Kinahan 2002-3</a> (Zhizo, Leopard's Kopje, Mapungubwe gold, Khami)</li>
+    <li><a href="https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0111224">Chirikure et al. 2014, PLOS ONE</a> (Leopard's Kopje, Mapungubwe and Khami dates)</li>
+    <li><a href="https://sahumanities.org/index.php/sah/article/download/468/740/1434">Huffman 2021, Southern African Humanities</a> (Bambata pottery)</li>
+    <li>Lewis-Williams and Dowson 1989, Images of Power (dying animals and trance)</li>
+    <li><a href="https://journals.uj.ac.za/pdf/safa/1995_1%20UJ%20FIELD%20Archive/04_3-17%20Ouzman%201995%20The%20fish,%20the%20shaman%20and%20peregrination.pdf">Ouzman 1995, Southern African Field Archaeology</a> (fish)</li>
+    <li><a href="https://journals.uj.ac.za/pdf/safa/1999_2%20UJ%20FIELD%20Archive/08_60-75%20Eastwood%201999%20Animal%20behaviour%20in%20San%20rock%20art,%20Makgabeng,%20Limpopo-Shashe%20Confluence.pdf">Eastwood et al. 1999, Limpopo-Shashe animals</a> (white bellies, dying animals)</li>
+    <li><a href="https://journals.udsm.ac.tz/index.php/sap/article/view/2709">Manyanga and Zhou, Studies in the African Past 7</a> (giraffe and kudu near Gwanda)</li>
+    <li><a href="https://diposit.ub.edu/bitstreams/2cb806a9-ab8a-43b7-a22c-dc58695903e6/download">Kumbani and Díaz-Andreu 2025</a> (white-outlined rhino, trance postures in Zimbabwe)</li>
+    <li><a href="https://theconversation.com/an-enigmatic-theme-in-san-rock-paintings-is-finally-unlocked-48474">Mguni 2015, The Conversation</a> (formlings)</li>
+    <li><a href="https://archives.crem-cnrs.fr/archives/items/CNRSMH_E_1996_013_001_001_032/">CREM archive, Ju/'hoan giraffe songs</a></li>
+    <li><a href="https://www.wits.ac.za/rockart/the-rock-art-of-africa/rock-art-of-african-farming-communities/">Wits RARI, farmer rock art</a> (finger versus brush, Sotho giraffes)</li>
+    <li><a href="https://journals.uj.ac.za/index.php/safa/article/view/3561">Chiwara-Maenzanise et al. 2025, Pomongwe tools</a> (quartz)</li>
+    <li><a href="https://biodiversityfoundation.org/wp-content/uploads/BFA-No.17_Bubiana-vegetation-survey.pdf">Timberlake and Mapaure 2007, Bubiana Conservancy vegetation survey</a> (parcels, geology, rivers)</li>
+    <li><a href="https://www.horsesafrica.com/rockyranch">Horses Africa, Rocky Ranch</a> ("hikes to view ancient cave paintings")</li>
+    <li><a href="https://www.law.co.zw/download/national-museums-and-monuments-act/">National Museums and Monuments Act [Ch. 25:11]</a> (sections 2, 20, 21, 23 and 25)</li>
+    <li><a href="https://naturalhistorymuseumzimbabwe.com/">Natural History Museum of Zimbabwe</a> and <a href="https://www.nmmz.co.zw/">NMMZ</a> (contacts)</li>
+    <li><a href="https://www.wits.ac.za/rockart/public-rock-art-sites/etiquette-when-visiting-rock-art-sites">Wits, etiquette at rock art sites</a></li>
+    <li><a href="https://www.dstretch.com/">DStretch</a> (method and phone apps)</li>
+  </ol>
+</details>
+
+</main>
+
+<script>
+document.querySelectorAll('.cmp').forEach(function (c) {
+  var r = c.querySelector('input');
+  var set = function () { c.style.setProperty('--pos', r.value + '%'); };
+  r.addEventListener('input', set); set();
+});
+document.querySelectorAll('.card').forEach(function (card) {
+  card.querySelectorAll('.seg button').forEach(function (b) {
+    b.addEventListener('click', function () {
+      card.querySelectorAll('.seg button').forEach(function (x) { x.setAttribute('aria-pressed', String(x === b)); });
+      card.querySelectorAll('.pic img').forEach(function (img) { img.hidden = img.dataset.v !== b.dataset.show; });
+    });
+  });
+});
+document.querySelectorAll('button.copy').forEach(function (b) {
+  var label = b.textContent;
+  b.addEventListener('click', function () {
+    var el = document.getElementById(b.dataset.copy);
+    var done = function () { b.textContent = 'Copied'; setTimeout(function () { b.textContent = label; }, 2000); };
+    var fallback = function () {
+      var r = document.createRange(); r.selectNodeContents(el);
+      var s = window.getSelection(); s.removeAllRanges(); s.addRange(r);
+      var ok = false;
+      try { ok = document.execCommand('copy'); } catch (e) { ok = false; }
+      if (ok) { s.removeAllRanges(); done(); } else { b.textContent = 'Text selected, copy it'; }
+    };
+    if (navigator.clipboard && navigator.clipboard.writeText) { navigator.clipboard.writeText(el.innerText).then(done, fallback); }
+    else { fallback(); }
+  });
+});
+</script>
+</body>
+</html>
